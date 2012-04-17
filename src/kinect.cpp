@@ -82,6 +82,24 @@ void kinect::getDepth(Mat &img){
 	depthMat.copyTo(img);
 }
 
+void kinect::undistortColor(Mat &img){
+	if(undistort_flag && !zero_rgb_distortion)
+	{
+		cv::remap(img,remapped_rgb,mapx_rgb, mapy_rgb, INTER_LINEAR);
+		remapped_rgb.copyTo(rgbMat);
+	}
+	img.copyTo(img);
+}
+
+void kinect::undistortDepth(Mat &img){
+	if(undistort_flag && !zero_depth_distortion)
+	{
+		cv::remap(img,remapped_d,mapx_d, mapy_d, INTER_NEAREST);
+		remapped_d.copyTo(depthMat);
+	}
+	img.copyTo(img);
+}
+
 void kinect::getAcc(accData &acc){
 	device->updateState();
 	device->getState().getAccelerometers(&acc.x, &acc.y, &acc.z);

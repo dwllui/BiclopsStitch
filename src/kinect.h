@@ -32,6 +32,10 @@ class kinect{
 		void getAcc(accData &acc);
 		//setting the LED colour on the kienct
 		void setLED(freenect_led_options _options);
+		//undistort the RGB image
+		void undistortColor(Mat &img);
+		//undistort the depth image
+		void undistortDepth(Mat &img);
 
 		//acessbile variables
 		int deviceNum; //specified device number for the kinect
